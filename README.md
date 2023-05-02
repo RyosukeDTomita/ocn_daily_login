@@ -6,6 +6,11 @@
 - [REFERENCE](#REFERENCE)
 
 # ABOUT
+- Using selenium, push [ocn top page](https://www.ocn.ne.jp/) "OCN訪問ポイント" button automatically to get Dpoint.
+- This script can save session information to [cookies.pkl](./cookies.pkl)
+
+![ocn訪問ポイント](./fig/ocn訪問ポイント.png)
+
 
 # ENVIRONMENT
 - python 3.8
@@ -25,5 +30,6 @@ pip -r requirements.txt
 
 ```shell
 python3 ./ocn_daily_login.py --userid <docomo id> --password <password>
+Type: Security code: Your SMS txt
 ```
 # REFERENCE
