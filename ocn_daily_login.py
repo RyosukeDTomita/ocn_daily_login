@@ -11,6 +11,8 @@ Date: 5/1
 """
 import argparse
 from selenium import webdriver
+from selenium.webdriver import chrome
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 import pickle
@@ -36,9 +38,13 @@ def fetch_driver():
     """fetch_driver.
     """
     #driver = webdriver.Chrome(ChromeDriverManager().install())
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=1920,1080")
     res = requests.get('https://chromedriver.storage.googleapis.com/LATEST_RELEASE')
-    driver = webdriver.Chrome(ChromeDriverManager(res.text).install())
-
+    driver = webdriver.Chrome(
+            service=Service(ChromeDriverManager(res.text).install()),
+            options=chrome_options)
     return driver
 
 
