@@ -15,6 +15,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 import pickle
 import time
+import requests
 #from bs4 import BeautifulSoup
 import os
 from os.path import join, dirname, abspath
@@ -34,7 +35,10 @@ def parse_args():
 def fetch_driver():
     """fetch_driver.
     """
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    #driver = webdriver.Chrome(ChromeDriverManager().install())
+    res = requests.get('https://chromedriver.storage.googleapis.com/LATEST_RELEASE')
+    driver = webdriver.Chrome(ChromeDriverManager(res.text).install())
+
     return driver
 
 
@@ -127,6 +131,7 @@ def main():
         save_cookies(driver, cookies_file)
     else:
         print("Session exist.")
+        login(driver, user_id, password)
         set_cookies(driver, cookies_file)
         driver.get(url) # reload page
 
